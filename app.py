@@ -3,10 +3,14 @@ from flask import Flask, render_template, request, jsonify, redirect, session
 from database import conectar, criar_banco
 from werkzeug.security import generate_password_hash, check_password_hash
 import secrets
+import os
 
 app = Flask(__name__)
 
-app.secret_key = "chave-secreta-do-caec"
+app.secret_key = os.environ.get(
+    "SECRET_KEY",
+    "chave-secreta-do-caec"
+)
 
 criar_banco()
 
