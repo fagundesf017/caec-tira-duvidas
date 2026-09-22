@@ -1,0 +1,440 @@
+body {
+
+    background-color: #f1936e;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+
+}
+h1 {
+
+    color: #133961;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 10px;
+
+}
+.disciplina {
+    background-color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+.disciplina a {
+    text-decoration: none;
+    color: darkblue;
+    font-size: 18px;
+    font-weight: bold;
+}
+.disciplina:hover {
+    background-color: #e8f1ff;
+}
+.botao {
+    display: inline-block;
+    background-color: darkblue;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+form {
+    margin-top: 20px;
+}
+
+input {
+
+    display: block;
+    padding: 12px;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+
+}
+
+form button {
+
+    padding: 12px 22px;
+    background-color: #123c69;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.2s;
+
+}
+form button:hover {
+
+    background-color: #0d2d4f;
+    transform: translateY(-1px);
+
+}
+textarea {
+
+    padding: 12px;
+    width: 100%;
+    max-width: 500px;
+    height: 120px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+    box-sizing: border-box;
+
+}
+.duvida {
+    background-color: white;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 12px;
+    border-left: 5px solid #123c69;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+.campo-resposta {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 300px;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+.cabecalho {
+    background-color: #123c69;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+
+    min-height: 70px;
+}
+
+
+/* LOGO — esquerda */
+
+.cabecalho .logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.cabecalho img {
+    width: 150px;
+    height: 70px;
+    object-fit: contain;
+}
+
+
+/* TEXTO — centro */
+
+.cabecalho > div:nth-child(2) {
+    text-align: center;
+}
+
+.cabecalho > div:nth-child(2) h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.cabecalho > div:nth-child(2) p {
+    margin: 5px 0 0;
+    font-size: 15px;
+}
+
+
+/* ÁREA DIREITA */
+
+.chapa {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+}
+
+
+/* EDIFICA */
+
+.chapa {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+}
+
+
+/* BOTÕES */
+
+.botao-conta,
+.botao-sair {
+    color: white;
+    text-decoration: none;
+
+    padding: 6px 12px;
+    border-radius: 6px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.botao-conta:hover,
+.botao-sair:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+
+/* USUÁRIO LOGADO */
+
+.usuario-logado {
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0;
+    text-transform: none;
+}
+.formulario-duvida {
+    background-color: white;
+    padding: 25px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+.formulario-duvida h2 {
+    margin-top: 0;
+    color: #123c69;
+    font-size: 22px;
+}
+.formulario-duvida label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #123c69;
+}
+.formulario-duvida textarea {
+    margin-bottom: 15px;
+}
+.subtitulo-duvidas {
+    color: #666;
+    margin-top: -5px;
+    margin-bottom: 20px;
+}
+.texto-duvida {
+    background-color: #f4f7fb;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+.texto-resposta {
+    background-color: #eef6ee;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border-left: 4px solid #4a7c59;
+}
+.nome-aluno {
+    font-weight: bold;
+    color: #123c69;
+    margin-bottom: 10px;
+}
+.nome-resposta {
+    font-weight: bold;
+    color: #4a7c59;
+}
+.assunto {
+    display: inline-block;
+    background-color: #e8f0f8;
+    color: #123c69;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.filtro-assunto {
+    background-color: white;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.filtro-assunto label {
+    font-weight: bold;
+    color: #123c69;
+    margin-right: 10px;
+}
+
+.filtro-assunto select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 14px;
+}
+.avaliacao {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.avaliacao span {
+    font-size: 14px;
+    color: #666;
+    margin-right: 5px;
+}
+
+.avaliacao button {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.avaliacao button:hover {
+    background-color: #f4f7fb;
+}
+.resultado-avaliacao {
+    font-size: 13px;
+    color: #777;
+    margin-top: 8px;
+}
+.avaliacao button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.quantidade-respostas {
+    color: #666;
+    font-size: 13px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.sem-resposta {
+    border-left: 5px solid #d98c00;
+}
+
+.sem-resposta::before {
+    content: "⏳ Aguardando resposta";
+    display: inline-block;
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.resumo {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.resumo-item {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    min-width: 150px;
+}
+
+.resumo-numero {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color: #123c69;
+}
+
+.resumo-texto {
+    display: block;
+    margin-top: 4px;
+    color: #666;
+    font-size: 14px;
+}
+.disciplinas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.disciplina {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #123c69;
+    font-size: 30px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: 0.2s;
+}
+
+.disciplina span {
+    display: block;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.disciplina:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+.botao-voltar {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #123c69;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.botao-voltar:hover {
+    text-decoration: underline;
+}
+.data-duvida {
+    color: #777;
+    font-size: 13px;
+    margin-top: -8px;
+    margin-bottom: 10px;
+}
+.filtros-duvidas {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.filtros-duvidas input,
+.filtros-duvidas select,
+.filtros-duvidas button {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.filtros-duvidas input {
+    flex: 1;
+    min-width: 220px;
+}
+
+.filtros-duvidas button {
+    cursor: pointer;
+}

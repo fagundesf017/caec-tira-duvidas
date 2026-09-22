@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>Cálculo 1 - CAEC Tira-Dúvidas</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+    <div class="logo">
+        <img src="{{ url_for('static', filename='img/Logo Chapa Edifica.jpeg') }}" alt="Logo EDIFICA">
+    </div>
+
+    <div>
+        <h2>CAEC Tira-Dúvidas</h2>
+        <p>Engenharia Civil • UFAL</p>
+    </div>
+
+    <div class="chapa">
+        <span>EDIFICA</span>
+    </div>
+
+</header>
+
+<a href="/" class="botao-voltar">
+    ← Voltar para disciplinas
+</a>
+   
+    <h1>Cálculo 1</h1>
+
+    <p>Bem-vindo à página de dúvidas de Cálculo 1.</p>
+
+    <div class="formulario-duvida">
+
+    <h2>Envie sua dúvida de Cálculo 1</h2>
+
+    <form method="POST">
+
+        <input type="hidden" name="tipo" value="duvida">
+
+<label for="nome">Seu nome</label>
+
+        <input
+            type="text"
+            name="nome"
+            placeholder="Digite seu nome"
+            required
+        >
+
+<label for="assunto">Assunto</label>
+
+<select name="assunto" required>
+
+    <option value="">Selecione um assunto</option>
+    <option value="Limites">Limites</option>
+    <option value="Derivadas">Derivadas</option>
+    <option value="Funções">Funções</option>
+    <option value="Continuidade">Continuidade</option>
+    <option value="Integrais">Integrais</option>
+
+</select>
+
+<label for="duvida">Sua dúvida</label>
+
+        <textarea
+            name="duvida"
+            placeholder="Digite sua dúvida"
+            required
+        ></textarea>
+
+        <button type="submit">Enviar dúvida</button>
+
+    </form>
+
+    </div>
+   
+<div class="filtro-assunto">
+
+    <label for="filtro">Filtrar por assunto:</label>
+
+    <select id="filtro">
+
+        <option value="todos">Todos</option>
+        <option value="Limites">Limites</option>
+        <option value="Derivadas">Derivadas</option>
+        <option value="Funções">Funções</option>
+        <option value="Continuidade">Continuidade</option>
+        <option value="Integrais">Integrais</option>
+
+    </select>
+
+</div>
+
+<div class="resumo">
+
+    <div class="resumo-item">
+        <span class="resumo-numero">{{ duvidas|length }}</span>
+        <span class="resumo-texto">Dúvidas</span>
+    </div>
+
+    <div class="resumo-item">
+        <span class="resumo-numero">
+            {{ duvidas|selectattr("resposta", "equalto", "")|list|length }}
+        </span>
+        <span class="resumo-texto">Aguardando resposta</span>
+    </div>
+
+    <div class="resumo-item">
+        <span class="resumo-numero">
+            {{ duvidas|selectattr("resposta", "ne", "")|list|length }}
+        </span>
+        <span class="resumo-texto">Respondidas</span>
+    </div>
+
+</div>
+
+    <h2>Dúvidas enviadas</h2>
+
+    <p class="subtitulo-duvidas">
+    Veja as dúvidas enviadas pelos estudantes e suas respectivas respostas.
+</p>
+
+{% for duvida in duvidas %}
+
+    <div class="duvida {% if not duvida.resposta %}sem-resposta{% endif %}" data-assunto="{{ duvida.assunto }}">
+
+    <p class="nome-aluno">
+    👤 {{ duvida.nome }}
+</p>
+
+<p class="assunto">
+    {{ duvida.assunto }}
+</p>
+
+    <p class="texto-duvida">
+    <strong>Dúvida:</strong> {{ duvida.duvida }}
+</p>
+
+<p class="quantidade-respostas">
+    💬 {{ 1 if duvida.resposta else 0 }} resposta{{ "s" if duvida.resposta else "" }}
+</p>
+
+{% if not duvida.resposta %}
+
+    <form method="POST">
+
+        <input type="hidden" name="tipo" value="resposta">
+
+        <input type="hidden" name="indice" value="{{ loop.index0 }}">
+
+        <input
+            type="text"
+            name="nome-resposta"
+            placeholder="Nome de quem responde"
+            required
+        >
+
+        <textarea
+            name="resposta"
+            placeholder="Digite a resposta"
+            required
+        ></textarea>
+
+        <button type="submit">Responder</button>
+
+    </form>
+
+    {% endif %}
+
+    {% if duvida.resposta %}
+
+    <p class="texto-resposta">
+
+    <span class="nome-resposta">
+        💬 {{ duvida.nome_resposta }}
+    </span>
+
+    <br>
+
+    {{ duvida.resposta }}
+
+</p>
+
+<p class="resultado-avaliacao">
+    👍 <span class="contador-sim">{{ duvida.sim }}</span> pessoas acharam útil
+    ·
+    👎 <span class="contador-nao">{{ duvida.nao }}</span> não acharam
+</p>
+
+<div class="avaliacao" data-indice="{{ loop.index0 }}">
+
+    <span>Essa resposta ajudou?</span>
+
+    <button type="button">👍 Sim</button>
+    <button type="button">👎 Não</button>
+
+</div>
+
+{% endif %}
+
+</div>
+
+{% endfor %}
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

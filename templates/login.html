@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Login - CAEC Tira-Dúvidas</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <div class="pagina-login">
+
+        <div class="caixa-login">
+
+            <h1>🔐 Entrar</h1>
+
+            <p>
+                Entre na sua conta do CAEC Tira-Dúvidas
+            </p>
+
+            <form method="POST">
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Seu e-mail"
+                    required
+                >
+
+                <input
+                    type="password"
+                    name="senha"
+                    placeholder="Sua senha"
+                    required
+                >
+
+                <button type="submit">
+                    Entrar
+                </button>
+
+            </form>
+
+            {% if mensagem %}
+
+            <p class="mensagem-login">
+                {{ mensagem }}
+            </p>
+
+            {% endif %}
+
+            <p>
+    <a href="/recuperar-senha">
+        🔑 Esqueci minha senha
+    </a>
+</p>
+
+<p>
+    Ainda não possui uma conta?
+    <a href="/cadastro">Criar conta</a>
+</p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

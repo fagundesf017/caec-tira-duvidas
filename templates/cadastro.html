@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Cadastro - CAEC Tira-Dúvidas</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <div class="pagina-login">
+
+        <div class="caixa-login">
+
+            <h1>📝 Criar conta</h1>
+
+            <p>
+                Cadastre-se no CAEC Tira-Dúvidas
+            </p>
+
+            <form method="POST">
+
+                <input
+                    type="text"
+                    name="nome"
+                    placeholder="Seu nome"
+                    required
+                >
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Seu e-mail"
+                    required
+                >
+
+                <input
+                    type="password"
+                    name="senha"
+                    placeholder="Sua senha"
+                    required
+                >
+
+                <button type="submit">
+                    Criar conta
+                </button>
+
+            </form>
+
+            {% if mensagem %}
+
+            <p class="mensagem-login">
+                {{ mensagem }}
+            </p>
+
+            {% endif %}
+
+            <p>
+                Já possui uma conta?
+                <a href="/login">Entrar</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

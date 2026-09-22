@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>CAEC Tira-Dúvidas</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="logo">
+        <img
+            src="{{ url_for('static', filename='img/Logo Chapa Edifica.jpeg') }}"
+            alt="Logo EDIFICA"
+        >
+    </div>
+
+    <div>
+        <h2>CAEC Tira-Dúvidas</h2>
+        <p>Engenharia Civil • UFAL</p>
+    </div>
+
+    <div class="chapa">
+
+    {% if session.get("usuario_id") %}
+
+        <span class="usuario-logado">
+            👤 Olá, {{ session.get("usuario_nome") }}!
+        </span>
+
+        <a href="/logout" class="botao-sair">
+            🚪 Sair
+        </a>
+
+    {% else %}
+
+        <a href="/login" class="botao-conta">
+            🔐 Entrar
+        </a>
+
+        <a href="/cadastro" class="botao-conta">
+            📝 Criar conta
+        </a>
+
+    {% endif %}
+
+</div>
+
+</header>
+
+
+<h1>CAEC Tira-Dúvidas</h1>
+
+<p class="subtitulo-duvidas">
+    Escolha o semestre e encontre a disciplina que você procura.
+</p>
+
+
+<div class="semestre">
+
+    <h2>1º SEMESTRE</h2>
+
+    <div class="disciplinas">
+
+        <a href="/disciplina/desenho1" class="disciplina">
+            📐
+            <span>Desenho 1</span>
+        </a>
+
+        <a href="/disciplina/calculo1" class="disciplina">
+            ∫
+            <span>Cálculo 1</span>
+        </a>
+
+        <a href="/disciplina/introducaoengenharia" class="disciplina">
+            🏗️
+            <span>Introdução à Engenharia</span>
+        </a>
+
+        <a href="/disciplina/geometriaanalitica" class="disciplina">
+            📊
+            <span>Geometria Analítica</span>
+        </a>
+
+        <a href="/disciplina/introducaocomputacao" class="disciplina">
+            💻
+            <span>Introdução à Computação</span>
+        </a>
+
+        <a href="/disciplina/metodologiacientifica" class="disciplina">
+            📚
+            <span>Metodologia Científica</span>
+        </a>
+
+    </div>
+
+</div>
+
+<div class="semestre">
+
+    <h2>2º SEMESTRE</h2>
+
+    <div class="disciplinas">
+
+        <a href="/disciplina/desenho2" class="disciplina">
+            📐
+            <span>Desenho 2</span>
+        </a>
+
+        <a href="/disciplina/calculo2" class="disciplina">
+            ∫
+            <span>Cálculo 2</span>
+        </a>
+
+        <a href="/disciplina/fisica1" class="disciplina">
+            ⚡
+            <span>Física 1</span>
+        </a>
+
+        <a href="/disciplina/algebralinear" class="disciplina">
+            📐
+            <span>Álgebra Linear</span>
+        </a>
+
+        <a href="/disciplina/laboratoriodefisica1" class="disciplina">
+            🔬
+            <span>Laboratório de Física 1</span>
+        </a>
+
+        <a href="/disciplina/topografia1" class="disciplina">
+            🗺️
+            <span>Topografia 1</span>
+        </a>
+
+        <a href="/disciplina/etica" class="disciplina">
+            ⚖️
+            <span>Ética</span>
+        </a>
+
+    </div>
+
+</div>
+
+<div class="semestre">
+
+    <h2>3º SEMESTRE</h2>
+
+    <div class="disciplinas">
+
+        <a href="/disciplina/fisica2" class="disciplina">
+            ⚡
+            <span>Física 2</span>
+        </a>
+
+        <a href="/disciplina/calculo3" class="disciplina">
+            ∫
+            <span>Cálculo 3</span>
+        </a>
+
+        <a href="/disciplina/quimicatecnologica" class="disciplina">
+            🧪
+            <span>Química Tecnológica</span>
+        </a>
+
+        <a href="/disciplina/mecanicasolidos1" class="disciplina">
+            🏗️
+            <span>Mecânica dos Sólidos 1</span>
+        </a>
+
+        <a href="/disciplina/laboratorioquimica" class="disciplina">
+            🔬
+            <span>Laboratório de Química</span>
+        </a>
+
+        <a href="/disciplina/calculonumerico" class="disciplina">
+            💻
+            <span>Cálculo Numérico</span>
+        </a>
+
+        <a href="/disciplina/estatistica" class="disciplina">
+            📊
+            <span>Estatística</span>
+        </a>
+
+        <a href="/disciplina/topografia2" class="disciplina">
+            🗺️
+            <span>Topografia 2</span>
+        </a>
+
+    </div>
+
+</div>
+
+<div class="semestre">
+
+    <h2>4º SEMESTRE</h2>
+
+    <div class="disciplinas">
+
+        <a href="/disciplina/fisica3" class="disciplina">
+            ⚡
+            <span>Física 3</span>
+        </a>
+
+        <a href="/disciplina/calculo4" class="disciplina">
+            ∫
+            <span>Cálculo 4</span>
+        </a>
+
+        <a href="/disciplina/teoriadasestruturas1" class="disciplina">
+            🏗️
+            <span>Teoria das Estruturas 1</span>
+        </a>
+
+        <a href="/disciplina/arquiteturaeconfortoambiental" class="disciplina">
+            🏠
+            <span>Arquitetura e Conforto Ambiental</span>
+        </a>
+
+        <a href="/disciplina/fenomenosdetransporte1" class="disciplina">
+            🌊
+            <span>Fenômenos de Transporte 1</span>
+        </a>
+
+        <a href="/disciplina/geologiadeengenhariaeambiental" class="disciplina">
+            🪨
+            <span>Geologia de Engenharia e Ambiental</span>
+        </a>
+
+        <a href="/disciplina/laboratoriodegeologia" class="disciplina">
+            🔬
+            <span>Laboratório de Geologia de Engenharia e Ambiental</span>
+        </a>
+
+        <a href="/disciplina/laboratoriodefisica2" class="disciplina">
+            🔬
+            <span>Laboratório de Física 2</span>
+        </a>
+
+    </div>
+
+</div>
+
+<div class="semestre">
+
+    <h2>5º SEMESTRE</h2>
+
+    <div class="disciplinas">
+
+        <a href="/disciplina/fenomenosdetransporte2" class="disciplina">
+            🌊
+            <span>Fenômenos de Transporte 2</span>
+        </a>
+
+        <a href="/disciplina/mecanicasolidos2" class="disciplina">
+            🏗️
+            <span>Mecânica dos Sólidos 2</span>
+        </a>
+
+        <a href="/disciplina/laboratoriodehidraulica" class="disciplina">
+            💧
+            <span>Laboratório de Hidráulica</span>
+        </a>
+
+        <a href="/disciplina/economiaparaengenharia" class="disciplina">
+            💰
+            <span>Economia para Engenharia</span>
+        </a>
+
+        <a href="/disciplina/eletrotecnicaaplicada" class="disciplina">
+            ⚡
+            <span>Eletrotécnica Aplicada</span>
+        </a>
+
+        <a href="/disciplina/laboratoriodemateriais" class="disciplina">
+            🧪
+            <span>Laboratório de Materiais</span>
+        </a>
+
+        <a href="/disciplina/materiaisdeconstrucao1" class="disciplina">
+            🧱
+            <span>Materiais de Construção 1</span>
+        </a>
+
+        <a href="/disciplina/hidraulica" class="disciplina">
+            💦
+            <span>Hidráulica</span>
+        </a>
+
+    </div>
+
+</div>
+
+<div class="semestre">
+
+    <h2>6º SEMESTRE</h2>
+
+    <div class="disciplinas">
+
+        <a href="/disciplina/mecanicasolidos3" class="disciplina">
+            🏗️
+            <span>Mecânica dos Sólidos 3</span>
+        </a>
+
+        <a href="/disciplina/hidrologia" class="disciplina">
+            🌧️
+            <span>Hidrologia</span>
+        </a>
+
+        <a href="/disciplina/sistemasdeabastecimentodeagua" class="disciplina">
+            🚰
+            <span>Sistemas de Abastecimento de Água</span>
+        </a>
+
+        <a href="/disciplina/mecanicasolos1" class="disciplina">
+            🌎
+            <span>Mecânica dos Solos 1</span>
+        </a>
+
+        <a href="/disciplina/laboratoriodosolos1" class="disciplina">
+            🧪
+            <span>Laboratório de Solos 1</span>
+        </a>
+
+        <a href="/disciplina/teoriadasinstalacoeseletricasprediais" class="disciplina">
+            ⚡
+            <span>Teoria das Instalações Elétricas Prediais</span>
+        </a>
+
+        <a href="/disciplina/materiaisdeconstrucao2" class="disciplina">
+            🧱
+            <span>Materiais de Construção 2</span>
+        </a>
+
+    </div>
+
+</div>
+
+<div class="semestre">
+
+    <h2>7º SEMESTRE</h2>
+
+    <div class="disciplinas">
+
+        <a href="/disciplina/teoriadasestruturas2" class="disciplina">
+            🏗️
+            <span>Teoria das Estruturas 2</span>
+        </a>
+
+        <a href="/disciplina/estruturasdeconcreto1" class="disciplina">
+            🧱
+            <span>Estruturas de Concreto 1</span>
+        </a>
+
+        <a href="/disciplina/estruturasdeaco" class="disciplina">
+            🔩
+            <span>Estruturas de Aço</span>
+        </a>
+
+        <a href="/disciplina/sistemasdeesgotamentosanitarioepluvial" class="disciplina">
+            🚰
+            <span>Sistemas de Esgotamento Sanitário e Pluvial</span>
+        </a>
+
+        <a href="/disciplina/instalacoeshidraulicasesanitarias" class="disciplina">
+            💧
+            <span>Instalações Hidráulicas e Sanitárias</span>
+        </a>
+
+        <a href="/disciplina/mecanicasolos2" class="disciplina">
+            🌎
+            <span>Mecânica dos Solos 2</span>
+        </a>
+
+        <a href="/disciplina/laboratoriodosolos2" class="disciplina">
+            🧪
+            <span>Laboratório de Solos 2</span>
+        </a>
+
+    </div>
+
+</div>
+
+<div class="semestre">
+
+    <h2>8º SEMESTRE</h2>
+
+    <div class="disciplinas">
+
+        <a href="/disciplina/estruturasdeconcreto2" class="disciplina">
+            🧱
+            <span>Estruturas de Concreto 2</span>
+        </a>
+
+        <a href="/disciplina/estruturasdemadeira" class="disciplina">
+            🪵
+            <span>Estruturas de Madeira</span>
+        </a>
+
+        <a href="/disciplina/fundacoes1" class="disciplina">
+            🏗️
+            <span>Fundações 1</span>
+        </a>
+
+        <a href="/disciplina/gestaoderesiduossolidos" class="disciplina">
+            ♻️
+            <span>Gestão de Resíduos Sólidos</span>
+        </a>
+
+        <a href="/disciplina/tecnologiadaconstrucaocivil1" class="disciplina">
+            🏠
+            <span>Tecnologia da Construção Civil 1</span>
+        </a>
+
+        <a href="/disciplina/planejamento" class="disciplina">
+            📋
+            <span>Planejamento</span>
+        </a>
+
+        <a href="/disciplina/transportes" class="disciplina">
+            🚗
+            <span>Transportes</span>
+        </a>
+
+        <a href="/disciplina/estradas" class="disciplina">
+            🛣️
+            <span>Estradas</span>
+        </a>
+
+    </div>
+
+</div>
+
+<div class="semestre">
+
+    <h2>9º SEMESTRE</h2>
+
+    <div class="disciplinas">
+
+        <a href="/disciplina/fundacoes2" class="disciplina">
+            🏗️
+            <span>Fundações 2</span>
+        </a>
+
+        <a href="/disciplina/tecnologiadaconstrucaocivil2" class="disciplina">
+            🏠
+            <span>Tecnologia da Construção Civil 2</span>
+        </a>
+
+        <a href="/disciplina/engenhariadesegurancadotrabalho" class="disciplina">
+            🦺
+            <span>Engenharia de Segurança do Trabalho</span>
+        </a>
+
+        <a href="/disciplina/direitoelegislacaodoengenheiro" class="disciplina">
+            ⚖️
+            <span>Direito e Legislação do Engenheiro</span>
+        </a>
+
+        <a href="/disciplina/administracao" class="disciplina">
+            📊
+            <span>Administração</span>
+        </a>
+
+        <a href="/disciplina/pavimentacao" class="disciplina">
+            🛣️
+            <span>Pavimentação</span>
+        </a>
+
+    </div>
+
+</div>
+
+<div class="semestre">
+
+    <h2>10º SEMESTRE</h2>
+
+    <div class="disciplinas">
+
+        <a href="/disciplina/estagiosupervisionado" class="disciplina">
+            🏢
+            <span>Estágio Supervisionado</span>
+        </a>
+
+        <a href="/disciplina/trabalhodeconclusaodecurso" class="disciplina">
+            📚
+            <span>Trabalho de Conclusão de Curso</span>
+        </a>
+
+        <a href="/disciplina/controleambiental" class="disciplina">
+            🌱
+            <span>Controle Ambiental</span>
+        </a>
+
+        <a href="/disciplina/gerenciaeempreendimentosnaconstrucaocivil" class="disciplina">
+            👷
+            <span>Gerência e Empreendimentos na Construção Civil</span>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

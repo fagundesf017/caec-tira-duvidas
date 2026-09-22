@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>{{ disciplina.nome }} - CAEC Tira-Dúvidas</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="logo">
+
+        <img
+            src="{{ url_for('static', filename='img/Logo Chapa Edifica.jpeg') }}"
+            alt="Logo EDIFICA"
+        >
+
+    </div>
+
+    <div>
+
+        <h2>CAEC Tira-Dúvidas</h2>
+
+        <p>
+            Engenharia Civil • UFAL
+        </p>
+
+    </div>
+
+    <div class="chapa">
+
+    {% if session.get("usuario_id") %}
+
+        <span class="usuario-logado">
+            👤 Olá, {{ session.get("usuario_nome") }}!
+        </span>
+
+        <a href="/logout" class="botao-sair">
+            🚪 Sair
+        </a>
+
+    {% else %}
+
+        <a href="/login" class="botao-conta">
+            🔐 Entrar
+        </a>
+
+        <a href="/cadastro" class="botao-conta">
+            📝 Criar conta
+        </a>
+
+    {% endif %}
+
+</div>
+
+</header>
+
+
+<a href="/" class="botao-voltar">
+
+    ← Voltar para disciplinas
+
+</a>
+
+
+<h1>
+    {{ disciplina.nome }}
+</h1>
+
+
+<p class="subtitulo-duvidas">
+
+    Bem-vindo à página de dúvidas de
+    {{ disciplina.nome }}.
+
+</p>
+
+
+<div class="formulario-duvida">
+
+    <h2>
+        Envie sua dúvida de {{ disciplina.nome }}
+    </h2>
+
+    <form method="POST">
+
+        <input
+            type="hidden"
+            name="tipo"
+            value="duvida"
+        >
+
+        {% if session.get("usuario_id") %}
+
+    <p class="usuario-formulario">
+        👤 Enviando como <strong>{{ session.get("usuario_nome") }}</strong>
+    </p>
+
+{% else %}
+
+    <p class="usuario-formulario">
+        🔐 Você precisa estar logado para enviar uma dúvida.
+    </p>
+
+{% endif %}
+
+        <label>
+            Assunto
+        </label>
+
+        <select
+            name="assunto"
+            required
+        >
+
+            <option value="">
+                Selecione um assunto
+            </option>
+
+            {% for assunto in disciplina.assuntos %}
+
+                <option value="{{ assunto }}">
+                    {{ assunto }}
+                </option>
+
+            {% endfor %}
+
+        </select>
+
+        <label>
+            Sua dúvida
+        </label>
+
+        <textarea
+            name="duvida"
+            placeholder="Digite sua dúvida"
+            required
+        ></textarea>
+
+        {% if session.get("usuario_id") %}
+
+    <button type="submit">
+        Enviar dúvida
+    </button>
+
+{% else %}
+
+    <a href="/login" class="botao-login-duvida">
+        🔐 Entrar para enviar dúvida
+    </a>
+
+{% endif %}
+
+    </form>
+
+</div>
+
+
+<div class="filtro-assunto">
+
+    <label for="filtro">
+        Filtrar por assunto:
+    </label>
+
+    <div class="filtros-duvidas">
+
+    <input
+        type="text"
+        id="busca-duvida"
+        placeholder="🔎 Buscar uma dúvida..."
+    >
+
+    <select id="filtro">
+        <option value="todos">📚 Todos os assuntos</option>
+
+        {% set assuntos = [] %}
+
+        {% for duvida in duvidas %}
+            {% if duvida.assunto not in assuntos %}
+                {% set _ = assuntos.append(duvida.assunto) %}
+                <option value="{{ duvida.assunto }}">
+                    {{ duvida.assunto }}
+                </option>
+            {% endif %}
+        {% endfor %}
+
+    </select>
+
+    <select id="ordenacao">
+        <option value="recentes">🕐 Mais recentes</option>
+        <option value="antigas">🕰️ Mais antigas</option>
+        <option value="respondidas">💬 Respondidas</option>
+        <option value="sem-resposta">❓ Sem resposta</option>
+    </select>
+
+    <button type="button" id="limpar-filtros">
+        🔄 Limpar filtros
+    </button>
+
+</div>
+
+    <select id="filtro">
+
+        <option value="todos">
+            Todos
+        </option>
+
+        {% for assunto in disciplina.assuntos %}
+
+            <option value="{{ assunto }}">
+                {{ assunto }}
+            </option>
+
+        {% endfor %}
+
+    </select>
+
+</div>
+
+
+<div class="resumo">
+
+    <div class="resumo-item">
+
+        <span class="resumo-numero">
+            {{ duvidas|length }}
+        </span>
+
+        <span class="resumo-texto">
+            Dúvidas
+        </span>
+
+    </div>
+
+
+    <div class="resumo-item">
+
+        <span class="resumo-numero">
+
+            {{ duvidas
+                |selectattr("resposta", "equalto", "")
+                |list
+                |length
+            }}
+
+        </span>
+
+        <span class="resumo-texto">
+            Aguardando resposta
+        </span>
+
+    </div>
+
+
+    <div class="resumo-item">
+
+        <span class="resumo-numero">
+
+            {{ duvidas
+                |selectattr("resposta", "ne", "")
+                |list
+                |length
+            }}
+
+        </span>
+
+        <span class="resumo-texto">
+            Respondidas
+        </span>
+
+    </div>
+
+</div>
+
+
+<h2>
+    Dúvidas enviadas
+</h2>
+
+
+<p class="subtitulo-duvidas">
+
+    Veja as dúvidas enviadas pelos estudantes
+    e suas respectivas respostas.
+
+</p>
+
+<div class="lista-duvidas">
+
+{% for duvida in duvidas %}
+
+<div
+    class="duvida {% if not duvida.resposta %}sem-resposta{% endif %}"
+    data-assunto="{{ duvida.assunto }}"
+    data-id="{{ duvida.id }}"
+    data-respondida="{{ 'sim' if duvida.resposta else 'nao' }}"
+>
+
+    <p class="nome-aluno">
+        👤 {{ duvida.nome }}
+    </p>
+
+    <p class="data-duvida">
+    📅 {{ duvida.data_formatada or "Data não disponível" }}
+</p>
+
+    <p class="assunto">
+        {{ duvida.assunto }}
+    </p>
+
+    <p class="texto-duvida">
+
+        <strong>Dúvida:</strong>
+
+        {{ duvida.duvida }}
+
+    </p>
+
+
+    <p class="quantidade-respostas">
+
+        💬
+
+        {{ 1 if duvida.resposta else 0 }}
+
+        resposta{{ "s" if duvida.resposta else "" }}
+
+    </p>
+
+
+  {% if not duvida.resposta %}
+
+    {% if session.get("usuario_id") %}
+
+        <form method="POST">
+
+            <input
+                type="hidden"
+                name="tipo"
+                value="resposta"
+            >
+
+            <input
+                type="hidden"
+                name="duvida_id"
+                value="{{ duvida['id'] }}"
+            >
+
+            <p class="usuario-formulario">
+                👤 Respondendo como
+                <strong>{{ session.get("usuario_nome") }}</strong>
+            </p>
+
+            <textarea
+                name="resposta"
+                placeholder="Digite a resposta"
+                required
+            ></textarea>
+
+            <button type="submit">
+                Responder
+            </button>
+
+        </form>
+
+    {% else %}
+
+        <p class="usuario-formulario">
+            🔐 Entre na sua conta para responder esta dúvida.
+        </p>
+
+        <a href="/login" class="botao-login-duvida">
+            🔐 Entrar para responder
+        </a>
+
+    {% endif %}
+
+{% endif %}
+
+
+    {% if duvida.resposta %}
+
+    <p class="texto-resposta">
+
+        <span class="nome-resposta">
+
+            💬 {{ duvida.nome_resposta }}
+
+        </span>
+
+        <br>
+
+        {{ duvida.resposta }}
+
+    </p>
+
+
+    <p class="resultado-avaliacao">
+
+        👍
+
+        <span class="contador-sim">
+            {{ duvida.sim }}
+        </span>
+
+        pessoas acharam útil
+
+        ·
+
+        👎
+
+        <span class="contador-nao">
+            {{ duvida.nao }}
+        </span>
+
+        não acharam
+
+    </p>
+
+
+    <div
+    class="avaliacao"
+    data-id="{{ duvida['id'] }}"
+    data-disciplina="{{ request.view_args.nome }}"
+>
+
+        <span>
+            Essa resposta ajudou?
+        </span>
+
+        <button type="button">
+            👍 Sim
+        </button>
+
+        <button type="button">
+            👎 Não
+        </button>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+</body>
+
+</html>
