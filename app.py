@@ -4,6 +4,9 @@ from database import conectar, criar_banco
 from werkzeug.security import generate_password_hash, check_password_hash
 import secrets
 import os
+import resend
+
+resend.api_key = os.environ.get("RESEND_API_KEY")
 
 app = Flask(__name__)
 
@@ -991,7 +994,7 @@ def recuperar_senha():
 
     if request.method == "POST":
 
-        email = request.form["email"]
+        email = request.form["email"].strip().lower()
 
         conexao = conectar()
         cursor = conexao.cursor()
@@ -1023,13 +1026,80 @@ def recuperar_senha():
 
             conexao.commit()
 
-            mensagem = f"Link de recuperação: /redefinir-senha/{token}"
+            # Link completo para redefinição da senha
+            link = request.url_root.rstrip("/") + f"/redefinir-senha/{token}"
 
-        else:
+            try:
 
-            mensagem = "Não encontramos uma conta com esse e-mail."
+                resend.Emails.send({
+                    "from": "CAEC Tira-Dúvidas <noreply@caectiraduvidas.com>",
+                    "to": [email],
+                    "subject": "Recuperação de senha — CAEC Tira-Dúvidas",
+                    "html": f"""
+                        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
+
+                            <h2 style="color: #123B6D;">
+                                CAEC Tira-Dúvidas
+                            </h2>
+
+                            <p>
+                                Olá, <strong>{usuario["nome"]}</strong>!
+                            </p>
+
+                            <p>
+                                Recebemos uma solicitação para redefinir a senha
+                                da sua conta.
+                            </p>
+
+                            <p>
+                                Clique no botão abaixo para criar uma nova senha:
+                            </p>
+
+                            <p>
+                                <a href="{link}"
+                                   style="
+                                       display: inline-block;
+                                       padding: 12px 20px;
+                                       background-color: #123B6D;
+                                       color: white;
+                                       text-decoration: none;
+                                       border-radius: 6px;
+                                       font-weight: bold;
+                                   ">
+                                    Redefinir minha senha
+                                </a>
+                            </p>
+
+                            <p>
+                                Este link é válido por <strong>15 minutos</strong>.
+                            </p>
+
+                            <p>
+                                Se você não solicitou a recuperação da senha,
+                                pode ignorar este e-mail.
+                            </p>
+
+                            <hr>
+
+                            <p style="font-size: 12px; color: #777;">
+                                CAEC Tira-Dúvidas — Engenharia Civil • UFAL
+                            </p>
+
+                        </div>
+                    """
+                })
+
+            except Exception as erro:
+
+                print("Erro ao enviar e-mail:", erro)
 
         conexao.close()
+
+        # Mensagem genérica por segurança
+        mensagem = (
+            "Se o e-mail estiver cadastrado, "
+            "enviamos um link para recuperação de senha."
+        )
 
     return render_template(
         "recuperar_senha.html",
